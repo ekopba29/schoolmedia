@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use App\Models\StudentClass;
 use Carbon\Exceptions\Exception;
 use Illuminate\Http\Request;
@@ -98,7 +99,10 @@ class ManageStudentClassController extends Controller
      */
     public function destroy(StudentClass $studentClass)
     {
+        if (Student::where('student_class_id',$studentClass->id)->count() > 0) {
+            return back()->with('notifSuccessFailedDelete','Gagal Hapus, Terdapat Siswa dikelas');
+        }
         $studentClass->delete();
-        return back()->with('notifSuccessDelete','ok');
+        return back()->with('notifSuccessDelete','Terdapat Siswa dikelas');
     }
 }

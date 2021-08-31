@@ -145,6 +145,15 @@
                                     </h5>
                                 </div>
                             @endif
+                            @if (session('notifSuccessFailedDelete'))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-window-close"></i>
+                                        {{session('notifSuccessFailedDelete')}}
+                                    </h5>
+                                </div>
+                            @endif
                             {{ $slot }}
                         </div>
                     </div>
